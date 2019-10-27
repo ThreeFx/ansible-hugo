@@ -1,40 +1,41 @@
-Role Name
+hugo
 =========
 
-A brief description of the role goes here.
+Sets up "CD" for a hugo site hosted on git.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+None.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+
+| Variable Name | Default Value | Description |
+--------------- |---------------|--------------
+`hugo_user` | "hugo" | User to run hugo as (will be created if not present)
+`hugo_home` | "/home/hugo" | Home directory of the hugo user
+
+`hugo_minify` | True | Whether to minify the generated content.
+`hugo_render_drafts` | False | Whether to render content marked as draft
+
+`hugo_dir` | "/var/www/hugo" | Directory to clone the hugo repo to
+`hugo_root` | "/" | Relative path in the repo where to run hugo
+
+`hugo_repo` | "changeme" | **required**, the repository to check out
+`hugo_repo_version` | "master" | Git branch/tag/hash to clone
+`hugo_repo_ssh_key` | "changeme" | **required if `hugo_repo` cloned via ssd** SSH key with whom to pull the hugo repository
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: hugo, x: 42 }
+See `molecule/default/playbook.yml`.
 
 License
 -------
@@ -44,5 +45,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+Find me on [GitHub](https://github.com/ThreeFx).
