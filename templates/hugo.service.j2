@@ -4,6 +4,6 @@ Description=Build static site {{ hugo_repo }}
 [Service]
 Type=simple
 WorkingDirectory={{ hugo_dir }}/{{ hugo_root }}
-ExecStart=/usr/bin/hugo -w {{ '-d' if hugo_render_drafts else '' }}
+ExecStart=/usr/bin/hugo -w {{ '-D' if hugo_render_drafts else '' }}
 User={{ hugo_user }}
 Group={{ hugo_user }}
