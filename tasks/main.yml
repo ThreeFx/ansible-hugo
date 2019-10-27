@@ -37,6 +37,7 @@
     state: directory
     owner: "{{ hugo_user }}"
     group: "{{ hugo_user }}"
+    mode: 0755
 
 - name: Check out the repository
   become: True
