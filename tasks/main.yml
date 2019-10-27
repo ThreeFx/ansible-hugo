@@ -20,6 +20,7 @@
   file:
     path: "{{ hugo_home }}/.ssh"
     state: directory
+    mode: 0700
   when: hugo_repo_ssh_key != 'changeme'
 
 - name: Configure ssh key
@@ -28,6 +29,7 @@
   template:
     src: id_rsa.j2
     dest: "{{ hugo_home }}/.ssh/id_rsa"
+    mode: 0600
   when: hugo_repo_ssh_key != 'changeme'
 
 - name: Ensure checkout location exists
@@ -46,6 +48,7 @@
     repo: "{{ hugo_repo }}"
     dest: "{{ hugo_dir }}"
     version: "{{ hugo_repo_version }}"
+    accept_hostkey: yes
     force: yes
   notify: restart hugo
 
