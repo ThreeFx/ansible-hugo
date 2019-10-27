@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: hugo
+      vars:
+        - hugo_repo: https://github.com/gohugoio/hugoBasicExample

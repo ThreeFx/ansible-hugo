@@ -1,0 +1,21 @@
+---
+- name: reload systemd
+  systemd:
+    daemon_reload: true
+
+- name: start timer
+  systemd:
+    name: hugo-pull.timer
+    state: started
+    enabled: yes
+
+- name: start watch
+  systemd:
+    name: hugo.path
+    state: started
+    enabled: yes
+
+- name: rebuild site
+  systemd:
+    name: hugo.service
+    state: restarted

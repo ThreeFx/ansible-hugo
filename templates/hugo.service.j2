@@ -1,0 +1,9 @@
+[Unit]
+Description=Build static site {{ hugo_repo }}
+
+[Service]
+Type=oneshot
+WorkingDirectory={{ hugo_dir }}
+ExecStart=/usr/bin/hugo
+User={{ hugo_user }}
+GxecStart=/bin/systemctl restart hugo.service

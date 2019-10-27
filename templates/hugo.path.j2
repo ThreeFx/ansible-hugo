@@ -1,0 +1,8 @@
+[Unit]
+Description=Watch the hugo filesystem for changes
+
+[Path]
+PathModified={{ hugo_dir }}
+
+[Install]
+WantedBy=multi-user.target

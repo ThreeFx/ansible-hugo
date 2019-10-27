@@ -1,0 +1,2 @@
+---
+hugo_dir: "/var/www/{{ hugo_repo | urlsplit('path') | basename }}"

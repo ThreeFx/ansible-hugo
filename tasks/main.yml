@@ -1,0 +1,73 @@
+---
+- name: Install hugo and dependencies
+  become: True
+  apt:
+    package:
+      - acl   # needed for become_user
+      - git
+      - hugo
+
+- name: Ensure hugo user exists
+  become: True
+  user:
+    name: "{{ hugo_user }}"
+    createhome: yes
+    home: "{{ hugo_home }}"
+
+- name: Ensure .ssh directory exists
+  become: True
+  become_user: "{{ hugo_user }}"
+  file:
+    path: "{{ hugo_home }}/.ssh"
+    state: directory
+  when: hugo_repo_ssh_key != 'changeme'
+
+- name: Configure ssh key
+  become: True
+  become_user: "{{ hugo_user }}"
+  template:
+    src: id_rsa.j2
+    dest: "{{ hugo_home }}/.ssh/id_rsa"
+  when: hugo_repo_ssh_key != 'changeme'
+
+- name: Ensure checkout location exists
+  become: True
+  file:
+    dest: "{{ hugo_dir }}"
+    state: directory
+    owner: "{{ hugo_user }}"
+    group: "{{ hugo_user }}"
+
+- name: Check out the repository
+  become: True
+  become_user: "{{ hugo_user }}"
+  git:
+    repo: "{{ hugo_repo }}"
+    dest: "{{ hugo_dir }}"
+    version: "{{ hugo_repo_version }}"
+    force: yes
+  notify: rebuild site
+
+- name: Configure systemd pull service for hugo
+  become: True
+  template:
+    src: "hugo-pull.{{ item }}.j2"
+    dest: "/etc/systemd/system/hugo-pull.{{ item }}"
+  with_items:
+    - service
+    - timer
+  notify:
+    - reload systemd
+    - start timer
+
+- name: Configure service for hugo
+  become: True
+  template:
+    src: "hugo.{{ item }}.j2"
+    dest: "/etc/systemd/system/hugo.{{ item }}"
+  with_items:
+    - service
+    - path
+  notify:
+    - reload systemd
+    - start watch

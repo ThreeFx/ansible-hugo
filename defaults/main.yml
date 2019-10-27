@@ -1,0 +1,7 @@
+---
+hugo_user: "hugo"
+hugo_home: "/home/hugo"
+
+hugo_repo: "changeme"
+hugo_repo_version: "master"
+hugo_repo_ssh_key: "changeme"
