@@ -1,15 +1,18 @@
 ---
 - name: reload systemd
+  become: True
   systemd:
     daemon_reload: true
 
 - name: start timer
+  become: True
   systemd:
     name: hugo-pull.timer
     state: started
     enabled: yes
 
 - name: restart hugo
+  become: True
   systemd:
     name: hugo.service
     state: restarted
