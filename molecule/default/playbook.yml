@@ -4,4 +4,6 @@
   roles:
     - role: hugo
       vars:
-        - hugo_repo: https://github.com/gohugoio/hugoBasicExample
+        - hugo_repo: https://github.com/gohugoio/hugo
+          hugo_repo_version: "v0.54.0"
+          hugo_root: "examples/blog"

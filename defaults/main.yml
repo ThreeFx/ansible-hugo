@@ -3,6 +3,7 @@ hugo_user: "hugo"
 hugo_home: "/home/hugo"
 
 hugo_dir: "/var/www/hugo"
+hugo_root: "/"
 
 hugo_repo: "changeme"
 hugo_repo_version: "master"

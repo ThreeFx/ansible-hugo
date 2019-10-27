@@ -47,7 +47,7 @@
     dest: "{{ hugo_dir }}"
     version: "{{ hugo_repo_version }}"
     force: yes
-  notify: rebuild site
+  notify: restart hugo
 
 - name: Configure systemd pull service for hugo
   become: True
@@ -61,14 +61,11 @@
     - reload systemd
     - start timer
 
-- name: Configure service for hugo
+- name: Configure hugo
   become: True
   template:
-    src: "hugo.{{ item }}.j2"
-    dest: "/etc/systemd/system/hugo.{{ item }}"
-  with_items:
-    - service
-    - path
+    src: "hugo.service.j2"
+    dest: "/etc/systemd/system/hugo.service"
   notify:
     - reload systemd
-    - start watch
+    - restart hugo
