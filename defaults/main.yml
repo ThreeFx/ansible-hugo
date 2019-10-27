@@ -2,6 +2,7 @@
 hugo_user: "hugo"
 hugo_home: "/home/hugo"
 
+hugo_minify: True
 hugo_render_drafts: False
 
 hugo_dir: "/var/www/hugo"
