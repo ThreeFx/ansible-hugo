@@ -1,7 +1,7 @@
 ---
-- name: Slugify repository name
+- name: Slugify local directory name
   set_fact:
-    hugo_repo_slug: "{{ (hugo_repo + ':' + hugo_repo_version) | regex_replace('[@_/:]+', '-') }}"
+    hugo_repo_slug: "{{ hugo_dir | regex_replace('/', '-') }}"
 
 - name: Install hugo and dependencies
   become: True
