@@ -8,4 +8,3 @@ ExecStart=/usr/bin/git fetch
 ExecStartPost=/usr/bin/git reset --hard origin/{{ hugo_repo_version }}
 User={{ hugo_user }}
 Group={{ hugo_user }}
-CapabilityBoundingSet=CAP_NET_BIND
