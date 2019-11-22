@@ -1,7 +1,7 @@
 ---
 - name: Slugify repository name
   set_fact:
-    hugo_repo_slug: "{{ (hugo_repo + ':' + hugo_repo_version) | regex_replace('[@_/:]*', '-') }}"
+    hugo_repo_slug: "{{ (hugo_repo + ':' + hugo_repo_version) | regex_replace('[@_/:]+', '-') }}"
 
 - name: Install hugo and dependencies
   become: True
@@ -73,7 +73,7 @@
     name: "hugo-{{ hugo_repo_slug }}-pull.timer"
     state: started
     enabled: yes
-  when: hugo_timer | changed
+  when: hugo_timer.changed
 
 - name: Configure hugo
   become: True
@@ -89,4 +89,4 @@
     name: "hugo-{{ hugo_repo_slug }}.service"
     state: restarted
     enabled: yes
-  when: hugo_service | changed
+  when: hugo_service.changed
