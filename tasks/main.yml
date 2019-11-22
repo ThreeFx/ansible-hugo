@@ -54,7 +54,7 @@
     version: "{{ hugo_repo_version }}"
     accept_hostkey: yes
     force: yes
-  notify: restart hugo
+  register: hugo_repo_checkout
 
 - name: Configure systemd pull service for hugo
   become: True
@@ -89,4 +89,4 @@
     name: "hugo-{{ hugo_repo_slug }}.service"
     state: restarted
     enabled: yes
-  when: hugo_service.changed
+  when:  hugo_repo_checkout.changed or hugo_service.changed
