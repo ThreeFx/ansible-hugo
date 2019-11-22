@@ -22,7 +22,7 @@ Role Variables
 `hugo_root` | "/" | Relative path in the repo where to run hugo
 `hugo_repo` | "changeme" | **required**, the repository to check out
 `hugo_repo_version` | "master" | Git branch/tag/hash to clone
-`hugo_repo_ssh_key` | "changeme" | **required if `hugo_repo` cloned via ssd** SSH key with whom to pull the hugo repository
+`hugo_repo_ssh_key` | "changeme" | **required if `hugo_repo` cloned via ssh** SSH key with whom to pull the hugo repository
 
 Dependencies
 ------------
