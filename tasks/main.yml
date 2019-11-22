@@ -1,4 +1,8 @@
 ---
+- name: Slugify repository name
+  set_fact:
+    hugo_repo_slug: "{{ (hugo_repo + ':' + hugo_repo_version) | regex_replace('[_/:]', '-'}}"
+
 - name: Install hugo and dependencies
   become: True
   apt:
@@ -56,7 +60,7 @@
   become: True
   template:
     src: "hugo-pull.{{ item }}.j2"
-    dest: "/etc/systemd/system/hugo-pull.{{ item }}"
+    dest: "/etc/systemd/system/hugo-{{ hugo_repo_slug }}-pull.{{ item }}"
   with_items:
     - service
     - timer
@@ -68,7 +72,7 @@
   become: True
   template:
     src: "hugo.service.j2"
-    dest: "/etc/systemd/system/hugo.service"
+    dest: "/etc/systemd/system/hugo-{{ hugo_repo_slug }}.service"
   notify:
     - reload systemd
     - restart hugo
