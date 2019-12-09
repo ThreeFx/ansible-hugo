@@ -4,6 +4,7 @@ hugo_home: "/home/hugo"
 
 hugo_minify: True
 hugo_render_drafts: False
+hugo_render_future: False
 hugo_base_url: ""
 
 hugo_dir: "/var/www/hugo"
