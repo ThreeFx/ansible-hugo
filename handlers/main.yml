@@ -3,4 +3,3 @@
   become: True
   systemd:
     daemon_reload: true
-
